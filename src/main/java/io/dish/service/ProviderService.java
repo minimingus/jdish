@@ -3,6 +3,7 @@ package io.dish.service;
 import io.dish.mappers.ProviderMapper;
 import io.dish.model.Provider;
 import io.dish.dto.ProviderDto;
+import io.dish.repository.ProviderRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

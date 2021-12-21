@@ -1,8 +1,17 @@
 package io.dish.model;
 
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "providerId" }) })
 public class Dish {
@@ -18,33 +27,16 @@ public class Dish {
         this.providerId = providerId;
     }
 
-    public Dish() {
-
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public UUID getProviderId() {
-        return providerId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Dish dish = (Dish) o;
+        return id != null && Objects.equals(id, dish.id);
     }
 
     @Override
-    public String toString() {
-        return "Dish{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", providerId=" + providerId +
-                '}';
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

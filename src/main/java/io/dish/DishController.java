@@ -25,6 +25,16 @@ public class DishController {
                 .orElse(Response.status(Response.Status.NOT_FOUND).entity(ErrorFactory.ofNotFound("dish")).build());
     }
 
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDishes() {
+        return dishService.findAllDishes()
+                .map(d -> Response.status(Response.Status.OK).entity(d).build())
+                .getOrElse(Response.status(Response.Status.NOT_FOUND).entity(ErrorFactory.ofNotFound("dish")).build());
+    }
+
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDish(DishDto dishDto) {

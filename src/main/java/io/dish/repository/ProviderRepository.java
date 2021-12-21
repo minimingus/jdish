@@ -1,4 +1,4 @@
-package io.dish.service;
+package io.dish.repository;
 
 import io.dish.model.Provider;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
