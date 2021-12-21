@@ -6,6 +6,8 @@
 name: Create and publish a Docker image
 
 on:
+  workflow_run:
+    workflows: [ "Java CI" ]
   push:
     branches: ['main']
 
