@@ -28,12 +28,12 @@ public class ProviderController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response createProvider(ProviderDto providerDto) {
-        try {
+//        try {
             UUID providerId = providerService.createProvider(providerDto);
             System.out.println("provider id: " + providerId);
             return Response.status(Response.Status.CREATED).entity(providerId).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
+//        } catch (Exception e) {
+//            return Response.status(Response.Status.BAD_REQUEST).entity(e.getCause().getMessage()).build();
+//        }
     }
 }

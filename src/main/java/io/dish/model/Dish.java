@@ -8,23 +8,22 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Getter
-@Setter
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "providerId" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "providerName" }) })
 public class Dish {
     @Id @GeneratedValue
     private UUID id;
     private String name;
     private String description;
-    private UUID providerId;
+    private String providerName;
 
-    public Dish(String name, String description, UUID providerId) {
+    public Dish(String name, String description, String providerName) {
         this.name = name;
         this.description = description;
-        this.providerId = providerId;
+        this.providerName = providerName;
     }
 
     @Override

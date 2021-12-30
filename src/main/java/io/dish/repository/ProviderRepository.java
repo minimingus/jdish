@@ -5,6 +5,7 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @ApplicationScoped
@@ -14,4 +15,5 @@ public class ProviderRepository implements PanacheRepository<Provider> {
         return Optional.ofNullable(find("name", name).firstResult());
 
     }
+
 }

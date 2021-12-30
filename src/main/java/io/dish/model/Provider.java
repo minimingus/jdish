@@ -12,15 +12,16 @@ import java.util.UUID;
 @Setter
 @ToString
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(name="providerExistsByName", columnNames = { "name"}) })
+
 public class Provider {
     @Id
     @GeneratedValue
-    UUID id;
+    UUID providerId;
 
-    @Column(unique=true)
     String name;
 
-    @OneToMany(mappedBy="providerId")
+    @OneToMany(mappedBy = "providerName")
     @ToString.Exclude
     Set<Dish> dishes;
 
@@ -28,10 +29,12 @@ public class Provider {
         this.name = name;
         this.dishes = dishes;
     }
-    public Provider() {}
 
-    public UUID getId() {
-        return id;
+    public Provider() {
+    }
+
+    public UUID getProviderId() {
+        return providerId;
     }
 
     public String getName() {
@@ -47,7 +50,7 @@ public class Provider {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Provider provider = (Provider) o;
-        return id != null && Objects.equals(id, provider.id);
+        return providerId != null && Objects.equals(providerId, provider.providerId);
     }
 
     @Override

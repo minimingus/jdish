@@ -3,7 +3,9 @@ package io.dish.service;
 import io.dish.dto.DishDto;
 import io.dish.mappers.DishMapper;
 import io.dish.model.Dish;
+import io.dish.model.Provider;
 import io.dish.repository.DishRepository;
+import io.dish.repository.ProviderRepository;
 import io.vavr.control.Option;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -17,6 +19,14 @@ public class DishService {
 
     @Inject
     DishRepository dishRepository;
+
+    @Inject
+    ProviderRepository providerRepository;
+
+    public Optional<DishDto> findById(UUID id) {
+        return dishRepository.findByDishId(id)
+                .map(DishMapper::toDishDto);
+    }
 
     public Optional<DishDto> findByName(String dishName) {
         return dishRepository.findByName(dishName)
@@ -34,9 +44,25 @@ public class DishService {
     public UUID createDish(DishDto dishDto) {
         System.out.println("creating dish");
         Dish dish = DishMapper.toDish(dishDto);
-        System.out.println(dish);
-        dishRepository.persistAndFlush(dish);
-        return dish.getId();
+        Optional<Provider> providerName = providerRepository.findByName(dishDto.getProviderName());
+
+        providerName.map(name -> {
+                            System.out.println("provider name " + name + " is present in provider table");
+                            System.out.println(dish);
+                            dishRepository.persistAndFlush(dish);
+                            return dish.getId();
+                        }
+                )
+                .orElseThrow(
+                        () -> new RuntimeException("Cannot create dish for a provider which doesnt exist. " +
+                                "provider name:" + dishDto.getProviderName()));
+    return null;
+    }
+
+    @Transactional
+    public void deleteDish(DishDto dishDto) {
+        dishRepository.deleteDish(dishDto);
+
     }
 
 

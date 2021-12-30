@@ -29,7 +29,7 @@ public class ProviderService {
         Provider provider = ProviderMapper.toProvider(providerDto);
         System.out.println(provider);
         providerRepository.persistAndFlush(provider);
-        return provider.getId();
+        return provider.getProviderId();
 
     }
 
