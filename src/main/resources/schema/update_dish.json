@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Dish",
+  "description": "Updating a dish",
+  "type": "object",
+  "properties": {
+    "description": {
+      "description": "Description of the product",
+      "type": "string"
+    }
+  }
+}

@@ -3,6 +3,7 @@ package io.dish.service;
 import io.dish.dto.DishDto;
 import io.dish.mappers.DishMapper;
 import io.dish.model.Dish;
+import io.dish.dto.DishUpdateDto;
 import io.dish.repository.DishRepository;
 import io.dish.repository.ProviderRepository;
 import io.vavr.control.Option;
@@ -43,9 +44,8 @@ public class DishService {
 
     @Transactional
     public UUID createDish(DishDto dishDto) {
-        System.out.println("creating dish");
+        System.out.println("service - dish - create");
         Dish dish = DishMapper.toDish(dishDto);
-
         return providerRepository.findByName(dishDto.getProviderName())
                 .map(name -> {
                             dishRepository.persistAndFlush(dish);
@@ -55,8 +55,14 @@ public class DishService {
     }
 
     @Transactional
+    public void updateDish(DishUpdateDto dishUpdateDto) {
+        System.out.println("service - dish - update");
+        dishRepository.updateDish(dishUpdateDto);
+    }
+
+    @Transactional
     public void deleteDish(DishDto dishDto) {
-        System.out.println("deleting dish");
+        System.out.println("service - dish - delete");
         dishRepository.deleteDish(dishDto);
 
     }

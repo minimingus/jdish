@@ -1,5 +1,5 @@
 package io.dish.events;
 
 public enum EventType {
-    ADDED,DELETED
+    ADD, DELETE, UPDATE
 }

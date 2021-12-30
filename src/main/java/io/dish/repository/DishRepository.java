@@ -2,6 +2,7 @@ package io.dish.repository;
 
 import io.dish.dto.DishDto;
 import io.dish.model.Dish;
+import io.dish.dto.DishUpdateDto;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.vavr.control.Option;
 
@@ -28,5 +29,9 @@ public class DishRepository implements PanacheRepository<Dish> {
 
     public void deleteDish(DishDto dishDto) {
         delete("providerName=?1 and name=?2",dishDto.getProviderName(), dishDto.getName());
+    }
+
+    public void updateDish(DishUpdateDto dishUpdateDto) {
+        update("description=?1", dishUpdateDto.getDescription());
     }
 }
