@@ -12,7 +12,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "providerName" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(name="uniqueKey1", columnNames = { "name", "providerName" }) })
 public class Dish {
     @Id @GeneratedValue
     private UUID id;
