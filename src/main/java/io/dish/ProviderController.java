@@ -3,6 +3,7 @@ package io.dish;
 import io.dish.dto.ErrorFactory;
 import io.dish.service.ProviderService;
 import io.dish.dto.ProviderDto;
+import io.vertx.core.json.JsonObject;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -21,7 +22,7 @@ public class ProviderController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProviderByName(@PathParam("name") String name) {
         return providerService.findByName(name)
-                .map(d -> Response.status(Response.Status.ACCEPTED).entity(d).build())
+                .map(d -> Response.status(Response.Status.ACCEPTED).entity("test").build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).entity(ErrorFactory.ofNotFound("provider")).build());
     }
 

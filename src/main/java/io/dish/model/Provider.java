@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -23,7 +24,7 @@ public class Provider {
 
     @OneToMany(mappedBy = "providerName")
     @ToString.Exclude
-    Set<Dish> dishes;
+    Set<Dish> dishes = new HashSet<>();
 
     public Provider(String name, Set<Dish> dishes) {
         this.name = name;

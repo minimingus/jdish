@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class ProviderMapper {
 
     public static ProviderDto toProviderDto(Provider provider) {
-        Set<Dish> dishes1 = provider.getDishes();
         Set<DishDto> dishes = Option.of(provider.getDishes())
                 .getOrElse(Collections::emptySet)
                 .stream()
